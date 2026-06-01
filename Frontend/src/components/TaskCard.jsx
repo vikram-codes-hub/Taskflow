@@ -20,6 +20,10 @@ export default function TaskCard({ task, onEdit, onDelete, onStatusChange, isAdm
   const daysUntilDue = task.dueDate 
     ? Math.ceil((new Date(task.dueDate) - new Date()) / (1000 * 60 * 60 * 24))
     : null;
+  
+  // Check if deadline is critical (1 day or less, not done)
+  const isCritical = daysUntilDue !== null && daysUntilDue <= 1 && task.status !== "DONE";
+  const isUrgent = daysUntilDue !== null && daysUntilDue <= 3 && daysUntilDue > 1 && task.status !== "DONE";
 
   return (
     <div
@@ -38,13 +42,29 @@ export default function TaskCard({ task, onEdit, onDelete, onStatusChange, isAdm
             isHovered ? 'w-full' : 'w-0'
           }`} />
         </div>
-        <span
-          className={`text-xs px-3 py-1 rounded-lg border flex items-center gap-1 shrink-0 font-bold uppercase tracking-wide transition-all duration-300 ${priorityStyles[task.priority]} ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
-        >
-          {task.priority}
-        </span>
+        <div className="flex flex-col items-end gap-2 shrink-0">
+          {/* Critical Deadline Warning */}
+          {isCritical && (
+            <div className="animate-bounce bg-gradient-to-r from-red-600 to-rose-600 text-white text-xs px-3 py-1 rounded-lg border border-red-400 flex items-center gap-1 font-bold uppercase tracking-wide shadow-lg shadow-red-600/50">
+              🚨 {isOverdue ? 'OVERDUE' : 'DUE TODAY'}
+            </div>
+          )}
+          
+          {/* Urgent Deadline Warning (2-3 days) */}
+          {isUrgent && !isCritical && (
+            <div className="bg-gradient-to-r from-orange-600 to-rose-600 text-white text-xs px-3 py-1 rounded-lg border border-orange-400 flex items-center gap-1 font-bold uppercase tracking-wide shadow-lg shadow-orange-600/30">
+              ⚡ {daysUntilDue}D LEFT
+            </div>
+          )}
+          
+          <span
+            className={`text-xs px-3 py-1 rounded-lg border flex items-center gap-1 shrink-0 font-bold uppercase tracking-wide transition-all duration-300 ${priorityStyles[task.priority]} ${
+              isHovered ? 'scale-110' : 'scale-100'
+            }`}
+          >
+            {task.priority}
+          </span>
+        </div>
       </div>
 
       {/* Description with Expand Animation */}
@@ -67,14 +87,23 @@ export default function TaskCard({ task, onEdit, onDelete, onStatusChange, isAdm
         </span>
         
         {task.dueDate && (
-          <span className={`text-xs px-3 py-1 rounded-lg border font-bold uppercase tracking-wide transition-all duration-300 ${
-            isOverdue 
+          <span className={`text-xs px-3 py-1 rounded-lg border font-bold uppercase tracking-wide transition-all duration-300 flex items-center gap-1 ${
+            isCritical
+              ? "bg-gradient-to-r from-red-600 to-rose-600 text-white border-red-400 animate-pulse shadow-lg shadow-red-600/50" 
+              : isUrgent
+              ? "bg-gradient-to-r from-orange-600 to-rose-600 text-white border-orange-400 shadow-lg shadow-orange-600/30"
+              : isOverdue 
               ? "bg-rose-900/30 text-rose-400 border-rose-700/50 animate-pulse" 
               : "bg-slate-800/30 text-slate-400 border-slate-600/50"
           }`}>
-            {new Date(task.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-            {daysUntilDue && daysUntilDue > 0 && ` (${daysUntilDue}d)`}
-            {isOverdue && " ⚠️"}
+            📅 {new Date(task.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+            {daysUntilDue !== null && (
+              <>
+                {daysUntilDue > 0 && ` (${daysUntilDue}d)`}
+                {daysUntilDue === 0 && " (TODAY)"}
+                {daysUntilDue < 0 && ` (${Math.abs(daysUntilDue)}d LATE)`}
+              </>
+            )}
           </span>
         )}
       </div>
