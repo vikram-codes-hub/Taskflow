@@ -21,7 +21,7 @@
 
 | Service | URL | Status |
 |---------|-----|--------|
-| **Frontend (React)** | https://taskflow-frontend.vercel.app | ✅ Live |
+| **Frontend (React)** | https://taskfloww-frontend.vercel.app | ✅ Live |
 | **Backend API** | https://taskflow-backend-l6sw.onrender.com | ✅ Live |
 | **API Docs** | https://taskflow-backend-l6sw.onrender.com/api-docs | ✅ Interactive |
 | **Database** | Supabase PostgreSQL | ✅ Connected |
@@ -123,7 +123,7 @@ TaskFlow is a **scalable REST API** built for team task management.
 ```
 ┌─────────────────────────────────────┐
 │  Frontend (React + Vite)            │
-│  https://taskflow-frontend.vercel.app
+│  https://taskfloww-frontend.vercel.app
 └────────────────┬────────────────────┘
                  │ HTTPS
                  ↓
