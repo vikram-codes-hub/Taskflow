@@ -3,23 +3,5 @@
   "devCommand": "npm run dev",
   "installCommand": "npm ci",
   "framework": "react",
-  "outputDirectory": "dist",
-  "env": {
-    "VITE_API_URL": "@api_url"
-  },
-  "env_sample": {
-    "VITE_API_URL": "http://localhost:5000/api/v1"
-  },
-  "git": {
-    "deploymentEnabled": {
-      "main": true
-    }
-  },
-  "regions": ["iad1"],
-  "functions": {
-    "api/**/*.js": {
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  }
+  "outputDirectory": "dist"
 }
