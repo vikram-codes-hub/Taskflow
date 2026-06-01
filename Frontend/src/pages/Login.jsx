@@ -4,8 +4,8 @@ import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
 
 const ADMIN_CREDENTIALS = {
-  email: "admin@taskflow.com",
-  password: "admin123456",
+  email: "admin@test.com",
+  password: "Admin@123456",
 };
 
 const USER_CREDENTIALS = {
