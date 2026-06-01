@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dist files
+dist/
+build/
+.next/
+out/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# OS
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Prisma
+prisma/migrations/
+.prisma/
+
+# Cache
+.eslintcache
+.cache/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# OS-specific
+.DS_Store
+.vscode/
+.idea/
+
+# Optional npm cache
+.npm
+
+# Docker volumes (optional)
+postgres_data/
+redis_data/
